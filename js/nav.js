@@ -36,6 +36,28 @@ function submitStory(event) {
 
 $navStorySubmit.on("click", submitStory);
 
+// This will run when the user wants to view their own stories
+
+function navUserStories(event) {
+  console.debug("navMyStories", event);
+  hidePageComponents();
+  putUserStoriesOnPage();
+  $ownStories.show();
+}
+
+$body.on("click", "#nav-my-stories", navUserStories);
+
+// This function will run when the user wants to view their favorite stories
+
+function navFavStories(event) {
+  console.debug("navFavStories", event);
+  hidePageComponents();
+  putFavoritesOnPage();
+  $favoritedStories.show();
+}
+
+$body.on("click", "#nav-favorites", navFavStories);
+
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {

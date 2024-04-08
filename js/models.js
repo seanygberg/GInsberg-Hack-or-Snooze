@@ -25,7 +25,8 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    const url = new URL(this.url);
+    return url.host;
   }
 }
 
@@ -84,13 +85,26 @@ class StoryList {
       })
       const data = res.data.story;
       story = new Story(data);
-      this.stories.unshift(data);
-      user.ownStories.unshift(data);
+      this.stories.unshift(story);
+      user.ownStories.unshift(story);
     } catch (error) {
       console.error("Error adding story:", error);
       throw error;
     }    
     return story;
+  }
+
+  async removeStory(user, storyId) {
+    const token = user.loginToken;
+    await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "DELETE",
+      data: { token: user.loginToken }
+    });
+    // filter out the story whose ID we are removing
+    this.stories = this.stories.filter(s => s.storyId !== storyId);
+    user.ownStories = user.ownStories.filter(s => s.storyId !== storyId);
+    user.favorites = user.favorites.filter(s => s.storyId !== storyId);
   }
 }
 
