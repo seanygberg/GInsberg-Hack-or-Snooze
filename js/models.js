@@ -236,9 +236,9 @@ class User {
   async updateFavorite(state, story) {
     let method = "";
     if (state === "add") {
-      method = "POST"
+      method = "POST";
     } else {
-      method === "DELETE"
+      method = "DELETE";
     }
     const token = this.loginToken;
     await axios({

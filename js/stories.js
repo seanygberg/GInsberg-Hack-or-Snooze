@@ -156,14 +156,17 @@ async function addOrRemoveFavorite(event) {
   const $itemToFavorite = target.closest("li");
   const id = $itemToFavorite.attr("id");
   const story = storyList.stories.find(s => s.storyId === id);
+  console.log(target);
 
   const isAlreadyFav = target.hasClass("fas");
   if (isAlreadyFav) {
     await currentUser.removeFavorite(story);
-    target.closest("li").toggleClass("fas far");
+    target.closest("i").removeClass("fas");
+    target.closest("i").addClass("far");
   } else {
     await currentUser.addFavorite(story);
-    target.closest("li").toggleClass("fas far");
+    target.closest("i").removeClass("far");
+    target.closest("i").addClass("fas");
   }
 }
 
