@@ -136,10 +136,10 @@ function putFavoritesOnPage() {
 
   $favoritedStories.empty();
 
-  let noStories = currentUser.ownStories.length === 0;
+  let noStories = currentUser.favorites.length === 0;
 
   if (noStories) {
-    $ownStories.append("<h5>User has not added any favorites yet!</h5>");
+    $favoritedStories.append("<h5>User has not added any favorites yet!</h5>");
   }
   // loop through all own stories and generate HTML for them
   for (let story of currentUser.favorites) {
